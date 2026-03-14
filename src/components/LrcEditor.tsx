@@ -96,6 +96,16 @@ export default function LrcEditor() {
 
   const deleteRow = (i: number) => setRows(prev => prev.filter((_, idx) => idx !== i))
 
+  const moveRow = (i: number, dir: -1 | 1) => {
+    const j = i + dir
+    setRows(prev => {
+      if (j < 0 || j >= prev.length) return prev
+      const next = [...prev]
+      ;[next[i], next[j]] = [next[j], next[i]]
+      return next
+    })
+  }
+
   const addRow = () => {
     const lastSec = rows.length ? rows[rows.length - 1].sec + 3 : 0
     setRows(prev => [...prev, { sec: lastSec, lrc: secToLrc(lastSec), text: '', matched: '', score: 0 }])
@@ -269,7 +279,7 @@ export default function LrcEditor() {
       {/* table */}
       <div className="border border-[var(--border)] rounded-xl overflow-hidden">
         {/* header */}
-        <div className="grid grid-cols-[88px_1fr_1fr_32px] bg-[var(--surface2)] border-b border-[var(--border)]
+        <div className="grid grid-cols-[88px_1fr_1fr_56px] bg-[var(--surface2)] border-b border-[var(--border)]
           text-[11px] font-medium text-[var(--text3)] uppercase tracking-wider">
           <div className="px-3 py-2">타임스탬프</div>
           <div className="px-3 py-2">Whisper 인식</div>
@@ -287,7 +297,7 @@ export default function LrcEditor() {
 
             return (
               <div key={i}
-                className={`grid grid-cols-[88px_1fr_1fr_32px] border-b border-[var(--border)] last:border-0
+                className={`grid grid-cols-[88px_1fr_1fr_56px] border-b border-[var(--border)] last:border-0
                   transition-colors text-xs
                   ${isActive ? 'bg-[#1a1a35]' : isLow ? 'bg-[#1e1500]' : 'bg-[var(--surface)]'}
                   ${isTsEdit ? 'bg-[#0d2e1e]' : ''}`}
@@ -365,10 +375,20 @@ export default function LrcEditor() {
                   )}
                 </div>
 
-                {/* delete */}
-                <div className="flex items-center justify-center">
+                {/* actions */}
+                <div className="flex flex-col items-center justify-center gap-0.5 py-1">
+                  <button onClick={() => moveRow(i, -1)} disabled={i === 0}
+                    className="text-[var(--text3)] hover:text-[var(--text)] disabled:opacity-20
+                      transition-colors leading-none px-1 text-[10px]">
+                    ▲
+                  </button>
+                  <button onClick={() => moveRow(i, 1)} disabled={i === rows.length - 1}
+                    className="text-[var(--text3)] hover:text-[var(--text)] disabled:opacity-20
+                      transition-colors leading-none px-1 text-[10px]">
+                    ▼
+                  </button>
                   <button onClick={() => deleteRow(i)}
-                    className="text-[var(--text3)] hover:text-[var(--red)] transition-colors text-sm px-1">
+                    className="text-[var(--text3)] hover:text-[var(--red)] transition-colors leading-none px-1 text-[10px]">
                     ✕
                   </button>
                 </div>
