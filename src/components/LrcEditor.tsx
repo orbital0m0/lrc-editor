@@ -1,5 +1,5 @@
 'use client'
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 import {
   LrcRow, secToLrc, lrcToSec, matchRows, extractSunoUniq,
   autoParseJson, buildLrcText
@@ -163,6 +163,10 @@ export default function LrcEditor() {
 
   const lowCount = rows.filter(r => r.score < 0.5).length
   const activeIdx = rows.reduce((cur, r, i) => r.sec <= audioTime ? i : cur, -1)
+  const activeRowRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    activeRowRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+  }, [activeIdx])
 
   // ── render ─────────────────────────────────────────────
   if (step === 'setup') {
@@ -297,9 +301,10 @@ export default function LrcEditor() {
 
             return (
               <div key={i}
+                ref={isActive ? activeRowRef : undefined}
                 className={`grid grid-cols-[88px_1fr_1fr_56px] border-b border-[var(--border)] last:border-0
                   transition-colors text-xs
-                  ${isActive ? 'bg-[#1a1a35]' : isLow ? 'bg-[#1e1500]' : 'bg-[var(--surface)]'}
+                  ${isActive ? 'bg-[#1a1a35] ring-1 ring-inset ring-[var(--accent)] ring-opacity-40' : isLow ? 'bg-[#1e1500]' : 'bg-[var(--surface)]'}
                   ${isTsEdit ? 'bg-[#0d2e1e]' : ''}`}
               >
                 {/* timestamp cell */}
