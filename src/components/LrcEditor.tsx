@@ -61,7 +61,7 @@ export default function LrcEditor() {
 
   // audio
   const [audioTime, setAudioTime] = useState(0)
-  const [seekTo, setSeekTo] = useState<number | undefined>()
+  const [seekTo, setSeekTo] = useState<{ time: number; seq: number } | undefined>()
 
   // ts editing
   const [editingTs, setEditingTs] = useState<number | null>(null)
@@ -115,7 +115,7 @@ export default function LrcEditor() {
   const startTsEdit = (i: number) => {
     setEditingTs(i)
     setTsInputVal(rows[i].lrc)
-    setSeekTo(rows[i].sec)
+    setSeekTo(prev => ({ time: rows[i].sec, seq: (prev?.seq ?? 0) + 1 }))
   }
 
   const commitTsEdit = (i: number) => {

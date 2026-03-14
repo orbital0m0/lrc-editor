@@ -3,7 +3,7 @@ import { useRef, useState, useEffect, useCallback } from 'react'
 
 interface Props {
   onTimeUpdate?: (t: number) => void
-  seekTo?: number
+  seekTo?: { time: number; seq: number }
 }
 
 export default function AudioPlayer({ onTimeUpdate, seekTo }: Props) {
@@ -17,7 +17,7 @@ export default function AudioPlayer({ onTimeUpdate, seekTo }: Props) {
 
   useEffect(() => {
     if (!audioRef.current || seekTo == null) return
-    audioRef.current.currentTime = seekTo
+    audioRef.current.currentTime = seekTo.time
   }, [seekTo])
 
   const tick = useCallback(() => {
