@@ -11,7 +11,7 @@ export default function Home() {
             L
           </div>
           <span className="font-semibold text-[var(--text)] tracking-tight">LRC Editor</span>
-          <span className="text-xs text-[var(--text3)] ml-1">for Play Leaf</span>
+          <span className="text-xs text-[var(--text3)] ml-1">for Playlist</span>
           <div className="ml-auto flex items-center gap-2">
             <span className="text-[11px] text-[var(--text3)]">
               whisperweb.app / stable-ts → LRC

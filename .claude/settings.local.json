@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C D:/workspace/lrc-editor remote -v)",
+      "Bash(git -C D:/workspace/lrc-editor status && git -C D:/workspace/lrc-editor log --oneline -5)",
+      "Bash(git -C D:/workspace/lrc-editor add src/ package.json package-lock.json next.config.js postcss.config.js tailwind.config.ts tsconfig.json vercel.json .gitignore README.md next-env.d.ts)",
+      "Bash(git -C D:/workspace/lrc-editor push -u origin main)",
+      "Bash(vercel --version 2>/dev/null && cat D:/workspace/lrc-editor/vercel.json)",
+      "Bash(cd D:/workspace/lrc-editor && vercel deploy --prod 2>&1)",
+      "Bash(cd D:/workspace/lrc-editor && vercel deploy --prod --yes 2>&1)",
+      "Bash(cd D:/workspace/lrc-editor && vercel ls --prod 2>&1 | head -20)"
+    ]
+  }
+}

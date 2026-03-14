@@ -6,7 +6,7 @@ const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-sans' })
 const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' })
 
 export const metadata: Metadata = {
-  title: 'LRC Editor — Play Leaf',
+  title: 'LRC Editor',
   description: 'Whisper JSON → LRC 변환 + 싱크 편집 도구',
 }
 
