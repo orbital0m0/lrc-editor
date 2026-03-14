@@ -403,7 +403,14 @@ export default function LrcEditor() {
         <Btn onClick={buildLrc} variant="primary">LRC 생성</Btn>
         <Btn onClick={copyLrc}>{copied ? '복사됨!' : '복사'}</Btn>
         <Btn onClick={downloadLrc}>다운로드</Btn>
-        <Btn onClick={() => { setStep('setup'); setRows([]) }}>← 처음으로</Btn>
+        <Btn onClick={() => {
+          setStep('setup')
+          setRows([]); setSunoUniq([]); setDedupPreview([])
+          setJsonInput(''); setSunoInput('')
+          setMetaTitle(''); setMetaArtist('')
+          setOffsetVal(0); setLrcOut(''); setSetupMsg('')
+          setEditingTs(null); setSeekTo(undefined)
+        }}>← 처음으로</Btn>
       </div>
 
       {lrcOut && (
