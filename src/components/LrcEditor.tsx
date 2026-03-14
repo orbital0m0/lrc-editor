@@ -334,7 +334,7 @@ export default function LrcEditor() {
                             : { matched: sunoUniq[v], score: 1 }
                           )
                         }}
-                        className="w-full bg-transparent text-[var(--text)] text-xs outline-none
+                        className="w-full bg-[var(--surface2)] text-[var(--text)] text-xs outline-none
                           border border-[var(--border)] rounded px-1.5 py-1
                           focus:border-[var(--accent)]"
                       >
