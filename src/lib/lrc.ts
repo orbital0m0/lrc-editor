@@ -14,7 +14,7 @@ export function secToLrc(s: number): string {
 }
 
 export function lrcToSec(lrc: string): number | null {
-  const m = lrc.match(/\[(\d+):(\d+\.\d+)\]/)
+  const m = lrc.match(/\[(\d+):(\d+(?:\.\d+)?)\]/)
   return m ? parseInt(m[1]) * 60 + parseFloat(m[2]) : null
 }
 
