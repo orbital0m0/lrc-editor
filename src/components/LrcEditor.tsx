@@ -111,6 +111,12 @@ export default function LrcEditor() {
     setRows(prev => [...prev, { sec: lastSec, lrc: secToLrc(lastSec), text: '', matched: '', score: 0 }])
   }
 
+  const insertRowAfter = (i: number) => {
+    const sec = rows[i] ? rows[i].sec + 1 : 0
+    const newRow = { sec, lrc: secToLrc(sec), text: '', matched: '', score: 0 }
+    setRows(prev => [...prev.slice(0, i + 1), newRow, ...prev.slice(i + 1)])
+  }
+
   // offset
   const applyOffset = () => {
     if (offsetVal === 0) return
@@ -277,7 +283,7 @@ export default function LrcEditor() {
         {lowCount > 0 && <Badge color="amber">낮은 신뢰도 {lowCount}줄</Badge>}
         {lowCount === 0 && rows.length > 0 && <Badge color="green">매칭 완료</Badge>}
         <span className="text-[11px] text-[var(--text3)]">타임스탬프 클릭 → 직접 편집</span>
-        <Btn onClick={addRow} className="ml-auto">+ 줄 추가</Btn>
+        <Btn onClick={addRow} className="ml-auto">+ 맨 끝에 추가</Btn>
       </div>
 
       {/* table */}
@@ -390,6 +396,10 @@ export default function LrcEditor() {
                     className="text-[var(--text3)] hover:text-[var(--text)] disabled:opacity-20
                       transition-colors leading-none px-1 text-[10px]">
                     ▲
+                  </button>
+                  <button onClick={() => insertRowAfter(i)}
+                    className="text-[var(--text3)] hover:text-[var(--accent)] transition-colors leading-none px-1 text-[10px]">
+                    +
                   </button>
                   <button onClick={() => moveRow(i, 1)} disabled={i === rows.length - 1}
                     className="text-[var(--text3)] hover:text-[var(--text)] disabled:opacity-20
