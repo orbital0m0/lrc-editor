@@ -302,10 +302,14 @@ export default function LrcEditor() {
             return (
               <div key={i}
                 ref={isActive ? activeRowRef : undefined}
-                className={`grid grid-cols-[88px_1fr_1fr_56px] border-b border-[var(--border)] last:border-0
+                className={`grid grid-cols-[88px_1fr_1fr_56px] border-b last:border-0
                   transition-colors text-xs
-                  ${isActive ? 'bg-[#1a1a35] ring-1 ring-inset ring-[var(--accent)] ring-opacity-40' : isLow ? 'bg-[#1e1500]' : 'bg-[var(--surface)]'}
-                  ${isTsEdit ? 'bg-[#0d2e1e]' : ''}`}
+                  ${isActive
+                    ? 'bg-[#2a1f5e] border-[var(--accent)] border-l-2'
+                    : isLow
+                    ? 'bg-[#1e1500] border-[var(--border)]'
+                    : 'bg-[var(--surface)] border-[var(--border)]'}
+                  ${isTsEdit ? '!bg-[#0d2e1e]' : ''}`}
               >
                 {/* timestamp cell */}
                 <div className="flex items-center border-r border-[var(--border)]">
